@@ -7,7 +7,7 @@ var local = { // 3 objetos con arrays como propiedades
         { fecha: new Date(2019, 0, 2), nombreVendedora: "Grace", componentes: ["Monitor ASC 543", "Motherboard MZI"] },
         { fecha: new Date(2019, 0, 10), nombreVendedora: "Ada", componentes: ["Monitor ASC 543", "Motherboard ASUS 1200"] },
         { fecha: new Date(2019, 0, 12), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1200"] }
-    ], //Anio, dia, mes
+    ], //Anio, dia, mes // EL MES 0 ES ENERO!!!!!!!!! 
 
     precios: [
         { componente: "Monitor GPRS 3000", precio: 200 },
@@ -63,7 +63,7 @@ function cantidadVentasComponente(lasVentas) {
 
     for (let i = 0; i < arrayObjetosVentas.length; i++) {
         //console.log(arrayObjetosVentas[i].componentes);
-        for (let j = 0; j < arrayObjetosVentas.length; j++) { //coomo entrar directamente al array componentes dentro del array de objetos?
+        for (let j = 0; j < arrayObjetosVentas[i].componentes.length; j++) { //coomo entrar directamente al array componentes dentro del array de objetos?
             if (lasVentas === arrayObjetosVentas[i].componentes[j]) {
                 //console.log (arrayObjetosVentas[i].componentes[j])
                 //COMO HAGO PARA QUE ME CONTABILICE STRINGS?¡?¡?¡??
@@ -82,14 +82,56 @@ console.log(cantidadVentasComponente("Monitor ASC 543")); // 2
 // vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió 
 //en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica 
 //la función precioMaquina.
+//Date.getMonth() y Date.getFullYear()
+//ventas: [ { fecha: new Date(2019, 1, 4), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1500"] },
 
-//console.log( vendedoraDelMes(1, 2019) ); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+//entrar a local.ventas para llegar a fecha. en fecha, comparar mes y anio con get month y get full year
+// ver monto de plata por vendedora vendedora mayor gana
+
+
+function vendedoraDelMes(mes, anio) {
+    var nombreVendeUno = [];
+    var nombreVendeDos = [];
+    var sumaPorVende = 0; //numero
+    for (let i = 0; i < local.ventas.length; i++) {
+        var lasFechas = local.ventas[i].fecha
+        var lasVendedoras = local.ventas[i].nombreVendedora
+        var losComponentes = local.ventas[i].componentes
+        //console.log(lasFechas);   
+        console.log(lasVendedoras);
+        console.log(losComponentes);
+
+        if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
+            //console.log("la hacemo no la hacemo");
+            
+                for (let k = 0; k < losComponentes.length; k++) {
+                    if (lasVendedoras === "Grace"){
+                        nombreVendeUno.push(losComponentes[k])
+                    } else if (lasVendedoras === "Ada"){
+                        nombreVendeDos.push(losComponentes[k])
+                    }
+                    
+                }
+                
+                
+            
+            
+            console.log(nombreVendeUno);
+        }
+
+    }
+
+}
+
+
+
+console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
 //PUNTO UNO D
 // ventasMes(mes, anio): Obtener las ventas de un mes.
 
 // console.log( ventasMes(1, 2019) ); // 1250
-console.log("los de las fechas no los hice")
+
 
 //HECHO PUNTO UNO E
 // ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
