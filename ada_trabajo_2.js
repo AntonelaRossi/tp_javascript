@@ -44,8 +44,8 @@ function precioMaquina(componentes) {
     return sumaComponente;
 }
 
-var ventaDelDia = ["Monitor GPRS 3000", "Motherboard ASUS 1500", "Monitor ASC 543"];
-console.log(precioMaquina(ventaDelDia)); // 320 ($200 del monitor + $120 del motherboard)
+var ventaDelDia = ["Monitor GPRS 3000", "Motherboard ASUS 1500", "Monitor ASC 543"]; 
+console.log(precioMaquina(ventaDelDia)); // 320 ($200 del monitor + $120 del motherboard) // le agregue otro componente asi que $570
 
 
 
@@ -139,7 +139,7 @@ function ventasMes(mes, anio) {
         // console.log(lasFechas);
 
         if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
-            console.log(precioMaquina(todosComponentes));
+            //console.log(precioMaquina(todosComponentes));
             sumaTotal = sumaTotal + precioMaquina(todosComponentes)
         }
     }
@@ -179,10 +179,12 @@ console.log(ventasVendedora("Ada"));
 
 //HECHO PUNTO UNO F
 // componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es 
-//el que indica la función cantidadVentasComponente
+// el que indica la función cantidadVentasComponente
+// creo un array para guardar las cantidades de ventas nuevoArray (saco los componentes de precios y les aplico la funcion cantidadVen)
+// las cantidades me deben coincidir con los componentes tal componente tal cantidad
 
 function componenteMasVendido() {
-    var nuevoArray = [];
+    var nuevoArray = []; // cantidad de ventas de cada componente
     
     for (let i = 0; i < local.precios.length; i++) {
         var arrayComponentes= local.precios[i].componente
@@ -192,7 +194,10 @@ function componenteMasVendido() {
     }
     console.log(nuevoArray)
     console.log(nuevoArray.sort())
-
+    for (let j = 0; j < nuevoArray.length; j++) {
+        
+        
+    }
 
     //return arrayComponentes[]
     return nuevoArray[nuevoArray.length-1];
