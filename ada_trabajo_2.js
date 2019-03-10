@@ -88,49 +88,68 @@ console.log(cantidadVentasComponente("Monitor ASC 543")); // 2
 //entrar a local.ventas para llegar a fecha. en fecha, comparar mes y anio con get month y get full year
 // ver monto de plata por vendedora vendedora mayor gana
 
-
 function vendedoraDelMes(mes, anio) {
     var nombreVendeUno = [];
     var nombreVendeDos = [];
-    var sumaPorVende = 0; //numero
+
     for (let i = 0; i < local.ventas.length; i++) {
         var lasFechas = local.ventas[i].fecha
         var lasVendedoras = local.ventas[i].nombreVendedora
         var losComponentes = local.ventas[i].componentes
         //console.log(lasFechas);   
-        console.log(lasVendedoras);
-        console.log(losComponentes);
+        // console.log(lasVendedoras);
+        //console.log(losComponentes);
 
         if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
             //console.log("la hacemo no la hacemo");
-            
-                for (let k = 0; k < losComponentes.length; k++) {
-                    if (lasVendedoras === "Grace"){
-                        nombreVendeUno.push(losComponentes[k])
-                    } else if (lasVendedoras === "Ada"){
-                        nombreVendeDos.push(losComponentes[k])
-                    }
-                    
-                }
-                
-                
-            
-            
-            console.log(nombreVendeUno);
-        }
 
+            for (let k = 0; k < losComponentes.length; k++) {
+                if (lasVendedoras === "Grace") {
+                    nombreVendeUno.push(losComponentes[k])
+                    //console.log("mi vendedora es Grace, la vuelta es la " +[k] + " los componentes son " + nombreVendeUno);
+
+                } else if (lasVendedoras === "Ada") {
+                    nombreVendeDos.push(losComponentes[k])
+                    //console.log("mi vendedora es Ada, la vuelta es la " +[k] + " los componentes son " + nombreVendeDos);
+                }
+            }
+        }
+    }
+
+    if (precioMaquina(nombreVendeUno) < precioMaquina(nombreVendeDos)) {
+        return "La vendedera mas champion es Ada";
+    } else if (precioMaquina(nombreVendeUno) > precioMaquina(nombreVendeDos)) {
+        return "La vendedora mas champion es Grace";
     }
 
 }
-
-
 
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
 //PUNTO UNO D
 // ventasMes(mes, anio): Obtener las ventas de un mes.
 
-// console.log( ventasMes(1, 2019) ); // 1250
+function ventasMes(mes, anio) {
+
+    var sumaTotal = 0;
+
+    for (let i = 0; i < local.ventas.length; i++) {
+
+        var lasFechas = local.ventas[i].fecha
+        var todosComponentes = local.ventas[i].componentes
+        // console.log(todosComponentes);
+        // console.log(lasFechas);
+
+        if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
+            console.log(precioMaquina(todosComponentes));
+            sumaTotal = sumaTotal + precioMaquina(todosComponentes)
+        }
+    }
+    return sumaTotal
+
+}
+
+console.log(ventasMes(1, 2019)); // 1250
 
 
 //HECHO PUNTO UNO E
@@ -163,13 +182,46 @@ console.log(ventasVendedora("Ada"));
 //PUNTO UNO F
 // componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es 
 //el que indica la función cantidadVentasComponente
+//recorrer el array de componentes en precio, 
+//comparar con el array de componentes vendidos
+//pushear a arrays
+//ordenar 
+
+
+function componenteMasVendido() {
+    var nuevoArray = [];
+    
+    for (let i = 0; i < local.precios.length; i++) {
+        var arrayComponentes= local.precios[i].componente
+        
+        // cantidad = cantidadVentasComponente(local.precios[i].componente)
+        nuevoArray.push(cantidadVentasComponente(arrayComponentes));
+    }
+    console.log(nuevoArray)
+    console.log(nuevoArray.sort())
+
+
+    //return arrayComponentes[]
+    return nuevoArray[nuevoArray.length-1];
+    
+    
+}
+
+
+
+console.log(componenteMasVendido()); // Monitor GPRS 3000
 
 
 
 
-//console.log( componenteMasVendido() ); // Monitor GPRS 3000
 
-//PUNTO UNO G
-// huboVentas(mes, anio): que indica si hubo ventas en un mes determinado.
 
-// console.log( huboVentas(3, 2019) ); // false
+
+
+
+
+
+
+
+
+
