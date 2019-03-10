@@ -45,7 +45,7 @@ function precioMaquina(componentes) {
 }
 
 var ventaDelDia = ["Monitor GPRS 3000", "Motherboard ASUS 1500", "Monitor ASC 543"]; 
-console.log(precioMaquina(ventaDelDia)); // 320 ($200 del monitor + $120 del motherboard) // le agregue otro componente asi que $570
+console.log("La suma de los componentes es: " + precioMaquina(ventaDelDia)); // 320 ($200 del monitor + $120 del motherboard) // le agregue otro componente asi que $570
 
 
 
@@ -71,7 +71,7 @@ function cantidadVentasComponente(lasVentas) {
     return sumaVentas.length
 }
 
-console.log(cantidadVentasComponente("Monitor ASC 543")); // 2
+console.log("El componente se vendio " + cantidadVentasComponente("Monitor ASC 543") + " veces"); // 2
 
 //HECHO PUNTO UNO C
 // vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió 
@@ -114,7 +114,7 @@ function vendedoraDelMes(mes, anio) {
     }
 
     if (precioMaquina(nombreVendeUno) < precioMaquina(nombreVendeDos)) {
-        return "La vendedera mas champion es Ada";
+        return "La vendedora mas champion es Ada";
     } else if (precioMaquina(nombreVendeUno) > precioMaquina(nombreVendeDos)) {
         return "La vendedora mas champion es Grace";
     }
@@ -147,7 +147,7 @@ function ventasMes(mes, anio) {
 
 }
 
-console.log(ventasMes(1, 2019)); // 1250
+console.log("La suma total del mes es " + ventasMes(1, 2019)); // 1250
 
 
 //HECHO PUNTO UNO E
@@ -173,8 +173,8 @@ function ventasVendedora(nombreV) {
     return montoTotal
 }
 
-console.log(ventasVendedora("Grace")); // 900
-console.log(ventasVendedora("Ada"));
+console.log("La vendedora elegida vendio " + ventasVendedora("Grace") + " pesos en total"); // 900
+console.log("La vendedora elegida vendio " + ventasVendedora("Ada") + " pesos en total");
 
 
 //HECHO PUNTO UNO F
@@ -191,20 +191,18 @@ function componenteMasVendido() {
         
         // cantidad = cantidadVentasComponente(local.precios[i].componente)
         nuevoArray.push(cantidadVentasComponente(arrayComponentes));
-    }
-    console.log(nuevoArray)
-    console.log(nuevoArray.sort())
-    for (let j = 0; j < nuevoArray.length; j++) {
-        
-        
-    }
 
+    }
+    //console.log(nuevoArray)
+    console.log("Array de cantidad de ventas por componente ordenado " + nuevoArray.sort())
+    
+    
     //return arrayComponentes[]
     return nuevoArray[nuevoArray.length-1];
 
 }
 
-console.log(componenteMasVendido()); // Monitor GPRS 3000
+console.log("El componente mas vendido es: " + componenteMasVendido()); // Monitor GPRS 3000
 
 
 //HECHO PUNTO UNO G
@@ -224,6 +222,6 @@ function huboVentas(mes, anio) {
     }
 }
 
-console.log(huboVentas(3, 2019)); // false
+console.log("En el mes seleccionado hubo ventas: " + huboVentas(3, 2019)); // false
 
 // console.log( huboVentas(3, 2019) ); // false
