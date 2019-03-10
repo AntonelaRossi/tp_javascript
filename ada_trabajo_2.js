@@ -28,7 +28,6 @@ var local = { // 3 objetos con arrays como propiedades
 function precioMaquina(componentes) {
     var sumaComponente = 0;
 
-
     for (let index = 0; index < componentes.length; index++) {
         //console.log(componentes[index]);
 
@@ -54,12 +53,9 @@ console.log(precioMaquina(ventaDelDia)); // 320 ($200 del monitor + $120 del mot
 // cantidadVentasComponente(componente): recibe un componente y devuelve la cantidad de veces que fue vendido, o sea que formó parte 
 //de una máquina que se vendió. La lista de ventas no se pasa por parámetro, se asume que está identificada por la variable ventas.
 
-
-//ventas = local.ventas[i].componentes[i]
 function cantidadVentasComponente(lasVentas) {
     var sumaVentas = [];
     var arrayObjetosVentas = local.ventas
-
 
     for (let i = 0; i < arrayObjetosVentas.length; i++) {
         //console.log(arrayObjetosVentas[i].componentes);
@@ -72,13 +68,12 @@ function cantidadVentasComponente(lasVentas) {
             }
         }
     }
-
     return sumaVentas.length
 }
 
 console.log(cantidadVentasComponente("Monitor ASC 543")); // 2
 
-//PUNTO UNO C
+//HECHO PUNTO UNO C
 // vendedoraDelMes(mes, anio), se le pasa dos parámetros numéricos, (mes, anio) y devuelve el nombre de la vendedora que más vendió 
 //en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica 
 //la función precioMaquina.
@@ -86,7 +81,9 @@ console.log(cantidadVentasComponente("Monitor ASC 543")); // 2
 //ventas: [ { fecha: new Date(2019, 1, 4), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1500"] },
 
 //entrar a local.ventas para llegar a fecha. en fecha, comparar mes y anio con get month y get full year
-// ver monto de plata por vendedora vendedora mayor gana
+// pushear componentes por vendedora 
+// monto de plata por vendedora con precioMaquina
+// if vendedora uno mayor que dos gana
 
 function vendedoraDelMes(mes, anio) {
     var nombreVendeUno = [];
@@ -126,7 +123,8 @@ function vendedoraDelMes(mes, anio) {
 
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
-//PUNTO UNO D
+
+//HECHO PUNTO UNO D
 // ventasMes(mes, anio): Obtener las ventas de un mes.
 
 function ventasMes(mes, anio) {
@@ -156,8 +154,7 @@ console.log(ventasMes(1, 2019)); // 1250
 // ventasVendedora(nombre): Obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 
 // en local.ventas esta el nombre vendedora y el componente que vendio cada vendedoras
-// en precioMaquina es la funcion que suma todos los componentes
-// if ventasVendedora[i] > ventasVendedora[i]{return nombre}
+// precioMaquina es la funcion que suma precio todos los componentes
 
 function ventasVendedora(nombreV) {
     var montoTotal = 0; //numero
@@ -179,14 +176,10 @@ function ventasVendedora(nombreV) {
 console.log(ventasVendedora("Grace")); // 900
 console.log(ventasVendedora("Ada"));
 
-//PUNTO UNO F
+
+//HECHO PUNTO UNO F
 // componenteMasVendido(): Devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es 
 //el que indica la función cantidadVentasComponente
-//recorrer el array de componentes en precio, 
-//comparar con el array de componentes vendidos
-//pushear a arrays
-//ordenar 
-
 
 function componenteMasVendido() {
     var nuevoArray = [];
@@ -203,25 +196,29 @@ function componenteMasVendido() {
 
     //return arrayComponentes[]
     return nuevoArray[nuevoArray.length-1];
-    
-    
+
 }
-
-
 
 console.log(componenteMasVendido()); // Monitor GPRS 3000
 
 
+//HECHO PUNTO UNO G
+// huboVentas(mes, anio): que indica si hubo ventas en un mes determinado.
 
 
+//si coincide mes y anio y ventas !== 0 true
 
+function huboVentas(mes, anio) {
+    for (let i = 0; i < local.ventas.length; i++) {
+        var lasFechas = local.ventas[i].fecha;
+        if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
+            return true
+        } else {
+            return false
+        }
+    }
+}
 
+console.log(huboVentas(3, 2019)); // false
 
-
-
-
-
-
-
-
-
+// console.log( huboVentas(3, 2019) ); // false
