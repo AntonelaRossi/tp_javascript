@@ -46,6 +46,7 @@ function precioMaquina(componentes) {
 }
 
 var ventaDelDia = ["Monitor GPRS 3000", "Motherboard ASUS 1500", "Monitor ASC 543"];
+console.log("1.A");
 console.log("La suma de los componentes es: " + precioMaquina(ventaDelDia)); // 320 ($200 del monitor + $120 del motherboard) // le agregue otro componente asi que $570
 
 
@@ -71,7 +72,7 @@ function cantidadVentasComponente(lasVentas) {
     }
     return sumaVentas.length
 }
-
+console.log("1.B")
 console.log("El componente se vendio " + cantidadVentasComponente("Monitor ASC 543") + " veces"); // 2
 
 //HECHO PUNTO UNO C
@@ -95,7 +96,7 @@ function vendedoraDelMes(mes, anio) {
         var lasVendedoras = local.ventas[i].nombreVendedora
         var losComponentes = local.ventas[i].componentes
         //console.log(lasFechas);   
-        // console.log(lasVendedoras);
+        //console.log(lasVendedoras);
         //console.log(losComponentes);
 
         if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
@@ -121,7 +122,7 @@ function vendedoraDelMes(mes, anio) {
     }
 
 }
-
+console.log("1.C")
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
 
@@ -147,7 +148,7 @@ function ventasMes(mes, anio) {
     return sumaTotal
 
 }
-
+console.log("1.D")
 console.log("La suma total del mes es " + ventasMes(1, 2019)); // 1250
 
 
@@ -159,21 +160,21 @@ console.log("La suma total del mes es " + ventasMes(1, 2019)); // 1250
 
 function ventasVendedora(nombreV) {
     var montoTotal = 0; //numero
-    var vendedoraC = []; //array con los componentes que vendio cada una
+    var acumulador = []; //array con los componentes que vendio cada una
     for (let i = 0; i < local.ventas.length; i++) {
         //console.log(local.ventas[i].nombreVendedora)
         if (local.ventas[i].nombreVendedora === nombreV) {
-            vendedoraC.push(local.ventas[i].componentes)
+            acumulador.push(local.ventas[i].componentes)
         }
     }
 
-    for (let j = 0; j < vendedoraC.length; j++) {
-        montoTotal = montoTotal + precioMaquina(vendedoraC[j]);
+    for (let j = 0; j < acumulador.length; j++) {
+        montoTotal = montoTotal + precioMaquina(acumulador[j]);
     }
 
     return montoTotal
 }
-
+console.log("1.E")
 console.log("La vendedora elegida vendio " + ventasVendedora("Grace") + " pesos en total"); // 900
 console.log("La vendedora elegida vendio " + ventasVendedora("Ada") + " pesos en total");
 
@@ -195,14 +196,14 @@ function componenteMasVendido() {
 
     }
     //console.log(nuevoArray)
-    console.log("Array de cantidad de ventas por componente ordenado " + nuevoArray.sort())
+    //console.log("Array de cantidad de ventas por componente ordenado " + nuevoArray.sort())
 
 
     //return arrayComponentes[]
     return nuevoArray[nuevoArray.length - 1];
 
 }
-
+console.log("1.F")
 console.log("El componente mas vendido es: " + componenteMasVendido()); // Monitor GPRS 3000
 
 
@@ -222,7 +223,7 @@ function huboVentas(mes, anio) {
         }
     }
 }
-
+console.log("1.G")
 console.log("En el mes seleccionado hubo ventas: " + huboVentas(3, 2019)); // false
 
 // console.log( huboVentas(3, 2019) ); // false
@@ -237,7 +238,8 @@ console.log("En el mes seleccionado hubo ventas: " + huboVentas(3, 2019)); // fa
 
 //PUNTO DOS A
 // En las ventas ya existentes, tenemos que agregar la propiedad sucursal con el valor Centro (ya que es la sucursal original).
-
+console.log("2.A")
+console.log("Sucursal Centro al array Ventas:")
 for (let i = 0; i < local.ventas.length; i++) {
     local.ventas[i].sucursal = "Centro";
     console.log(local.ventas[i]);
@@ -245,34 +247,37 @@ for (let i = 0; i < local.ventas.length; i++) {
 
 //PUNTO DOS B
 // Agregar al objeto principal la propiedad sucursales: ['Centro', 'Caballito']
-
+console.log("2.B")
+console.log("Agregamos la propiedad SUCURSALES a local:")
 local.sucursales = ["Centro", "Caballito"];
 console.log(local)
 
 //PUNTO DOS C
 // Cargar la siguiente información en el array ventas, creando sus respectivos objetos 
 //siguiendo el patrón: fecha, nombreVendedora, componentes, sucursal
+console.log("2.C")
+console.log("NUEVAS VENTAS!!!")
 
 function nuevasVentas(fecha, nombreVendedora, componentes, sucursal) {
     local.ventas.push({ fecha, nombreVendedora, componentes, sucursal })
     return
 }
 
-nuevasVentas(new Date(2019, 2, 12), "Hedy", ["Monitor GPRS 3000", "HDD Toyiva"], "Centro");
-nuevasVentas(new Date(2019, 2, 24), "Sheryl", ["Motherboard ASUS 1500", "HDD Wezter Dishital"], "Caballito")
-nuevasVentas(new Date(2019, 2, 1), "Ada", ["Motherboard MZI", "RAM Quinston Fury"], "Centro")
-nuevasVentas(new Date(2019, 2, 11), "Grace", ["Monitor ASC 543", "RAM Quinston"], "Caballito")
-nuevasVentas(new Date(2019, 2, 15), "Ada", ["Motherboard ASUS 1200", "RAM Quinston Fury"], "Centro")
-nuevasVentas(new Date(2019, 2, 12), "Hedy", ["Motherboard ASUS 1500", "HDD Toyiva"], "Caballito")
-nuevasVentas(new Date(2019, 2, 21), "Grace", ["Motherboard MZI", "RAM Quinston"], "Centro")
-nuevasVentas(new Date(2019, 2, 08), "Sheryl", ["Monitor ASC 543", "HDD Wezter Dishital"], "Centro")
-nuevasVentas(new Date(2019, 2, 16), "Sheryl", ["Monitor GPRS 3000", "RAM Quinston Fury"], "Centro")
-nuevasVentas(new Date(2019, 2, 27), "Hedy", ["Motherboard ASUS 1200", "HDD Toyiva"], "Caballito")
-nuevasVentas(new Date(2019, 2, 22), "Grace", ["Monitor ASC 543", "HDD Wezter Dishital"], "Centro")
-nuevasVentas(new Date(2019, 2, 05), "Ada", ["Motherboard ASUS 1500", "RAM Quinston"], "Centro")
-nuevasVentas(new Date(2019, 2, 01), "Grace", ["Motherboard MZI", "HDD Wezter Dishital"], "Centro")
-nuevasVentas(new Date(2019, 2, 07), "Sheryl", ["Monitor GPRS 3000", "RAM Quinston"], "Caballito")
-nuevasVentas(new Date(2019, 2, 14), "Ada", ["Motherboard ASUS 1200", "HDD Toyiva"], "Centro")
+nuevasVentas(new Date(2019, 1, 12), "Hedy", ["Monitor GPRS 3000", "HDD Toyiva"], "Centro");
+nuevasVentas(new Date(2019, 1, 24), "Sheryl", ["Motherboard ASUS 1500", "HDD Wezter Dishital"], "Caballito")
+nuevasVentas(new Date(2019, 1, 1), "Ada", ["Motherboard MZI", "RAM Quinston Fury"], "Centro")
+nuevasVentas(new Date(2019, 1, 11), "Grace", ["Monitor ASC 543", "RAM Quinston"], "Caballito")
+nuevasVentas(new Date(2019, 1, 15), "Ada", ["Motherboard ASUS 1200", "RAM Quinston Fury"], "Centro")
+nuevasVentas(new Date(2019, 1, 12), "Hedy", ["Motherboard ASUS 1500", "HDD Toyiva"], "Caballito")
+nuevasVentas(new Date(2019, 1, 21), "Grace", ["Motherboard MZI", "RAM Quinston"], "Centro")
+nuevasVentas(new Date(2019, 1, 08), "Sheryl", ["Monitor ASC 543", "HDD Wezter Dishital"], "Centro")
+nuevasVentas(new Date(2019, 1, 16), "Sheryl", ["Monitor GPRS 3000", "RAM Quinston Fury"], "Centro")
+nuevasVentas(new Date(2019, 1, 27), "Hedy", ["Motherboard ASUS 1200", "HDD Toyiva"], "Caballito")
+nuevasVentas(new Date(2019, 1, 22), "Grace", ["Monitor ASC 543", "HDD Wezter Dishital"], "Centro")
+nuevasVentas(new Date(2019, 1, 05), "Ada", ["Motherboard ASUS 1500", "RAM Quinston"], "Centro")
+nuevasVentas(new Date(2019, 1, 01), "Grace", ["Motherboard MZI", "HDD Wezter Dishital"], "Centro")
+nuevasVentas(new Date(2019, 1, 07), "Sheryl", ["Monitor GPRS 3000", "RAM Quinston"], "Caballito")
+nuevasVentas(new Date(2019, 1, 14), "Ada", ["Motherboard ASUS 1200", "HDD Toyiva"], "Centro")
 
 console.log(local.ventas)
 
@@ -281,20 +286,21 @@ console.log(local.ventas)
 
 function ventasSucursal(sucursales) {
     var montoTotal = 0;
-    var sucursalElegida = [];
+    var acumulador = [];
     for (let i = 0; i < local.ventas.length; i++) {
         if (local.ventas[i].sucursal === sucursales) {
-            sucursalElegida.push(local.ventas[i].componentes)
+            acumulador.push(local.ventas[i].componentes)
         }
     }
-    for (let j = 0; j < sucursalElegida.length; j++) {
-        montoTotal = montoTotal + precioMaquina(sucursalElegida[j]);
+
+    for (let j = 0; j < acumulador.length; j++) {
+        montoTotal = montoTotal + precioMaquina(acumulador[j]);
 
     }
     return montoTotal;
 }
 
-
+console.log("2.D")
 console.log("La sucursal elegida vendió: " + ventasSucursal("Centro")); // 4195
 
 
@@ -302,7 +308,9 @@ console.log("La sucursal elegida vendió: " + ventasSucursal("Centro")); // 4195
 // Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad 
 //pero trabajando con una propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
 
-//LO UNICO QUE CAMBIA ES EL NOMBRE DEL Array ACUMULADOR y la propiedad que comparamos, es algo con this!?¡
+console.log("2.E")
+console.log("LO UNICO QUE CAMBIA ES LA CONDICION DEL IF, es algo con this!? ---- if (local.ventas[i].nombreVendedora === nombreV) ---- if (local.ventas[i].sucursal === sucursales) ----" +
+    "El primer termino hasta entrar al objeto LOCAL y al array VENTAS es igual, lo que cambia es la propiedad de ese objeto que necesitamos. El segundo termino entra por parametro")
 
 
 //PUNTO DOS F
@@ -342,8 +350,8 @@ function sucursalDelMes(mes, anio) {
 
 }
 
-
-console.log(sucursalDelMes(1, 2019) ); // "Centro"
+console.log("2.F")
+console.log(sucursalDelMes(1, 2019)); // "Centro"
 
 
 ///////////////////////////// PARTE 3 ///////////////////////////////
@@ -354,19 +362,31 @@ console.log(sucursalDelMes(1, 2019) ); // "Centro"
 // PUNTO TRES A
 
 //renderPorMes() //Muestra una lista ordenada del importe total vendido por cada mes/año
+// el orden viene desde el mes
+//console.log(ventasMes(2,2019))
+//console.log(local.ventas)
 
-//console.log( renderPorMes() );
+function renderPorMes() {
+    return "Ventas por mes" + "\n" + "Total de enero: " + ventasMes(1, 2019) + "\n" + "Total de Febrero: " + ventasMes(2, 2019);
+}
+
+console.log("3.A");
+console.log(renderPorMes());
 // Ventas por mes:
 //   Total de enero 2019: 1250
 //   Total de febrero 2019: 4210
-
 
 
 //PUNTO TRES B
 
 // renderPorSucursal() // Muestra una lista del importe total vendido por cada sucursal
 
-// console.log( renderPorSucursal() );
+function renderPorSucursal() {
+    return "Ventas por sucursal" + "\n" + "Total Sucursal Centro: " + ventasSucursal("Centro") + "\n" + "Total Sucursal Caballito: " + ventasSucursal("Caballito");
+}
+
+console.log("3.B")
+console.log(renderPorSucursal());
 // Ventas por sucursal:
 //   Total de Centro: 4195
 //   Total de Caballito: 1265
@@ -375,7 +395,33 @@ console.log(sucursalDelMes(1, 2019) ); // "Centro"
 //PUNTO TRES C
 
 // render() // Tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y la vendedora que más ingresos generó
-// console.log( render() );
+
+console.log("3.C");
+
+//console.log("Grace vendio: " + ventasVendedora("Grace"));
+//console.log("Ada vendio: " +ventasVendedora("Ada"));
+//console.log("Hedy vendio: " +ventasVendedora("Hedy"));
+//console.log("Sheryl vendio: " +ventasVendedora("Sheryl"));
+
+
+
+function render() {
+    //var arrayVendedoras = [];
+    //for (let i = 0; i < local.vendedoras.length; i++) {
+    //    var ventasLocas = local.vendedoras[i] +  " vendio: " + ventasVendedora(local.vendedoras[i]);
+    //    console.log(ventasLocas);
+    //}
+
+    //for (let i = 0; i < local.vendedoras.length; i++) {
+    //    arrayVendedoras.push(ventasVendedora(local.vendedoras[i]));
+    
+    //}
+    //console.log(arrayVendedoras)
+
+    return "Reporte" + "\n" + renderPorMes() + "\n" + renderPorSucursal() + "\n" + "Producto estrella: " + componenteMasVendido() + "\n" 
+}
+
+console.log(render());
 // Reporte
 // Ventas por mes:
 //   Total de enero 2019: 1250
