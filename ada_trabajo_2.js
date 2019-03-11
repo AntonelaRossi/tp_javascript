@@ -302,6 +302,9 @@ console.log("La sucursal elegida vendió: " + ventasSucursal("Centro")); // 4195
 // Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad 
 //pero trabajando con una propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
 
+//LO UNICO QUE CAMBIA ES EL NOMBRE DEL Array ACUMULADOR y la propiedad que comparamos, es algo con this!?¡
+
+
 //PUNTO DOS F
 // Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y 
 //devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. 
