@@ -24,6 +24,7 @@ var local = { // 3 objetos con arrays como propiedades
 
 
 //HECHO PUNTO UNO A
+//monto de cada componente o muchos
 
 function precioMaquina(componentes) {
     var sumaComponente = 0;
@@ -44,7 +45,7 @@ function precioMaquina(componentes) {
     return sumaComponente;
 }
 
-var ventaDelDia = ["Monitor GPRS 3000", "Motherboard ASUS 1500", "Monitor ASC 543"]; 
+var ventaDelDia = ["Monitor GPRS 3000", "Motherboard ASUS 1500", "Monitor ASC 543"];
 console.log("La suma de los componentes es: " + precioMaquina(ventaDelDia)); // 320 ($200 del monitor + $120 del motherboard) // le agregue otro componente asi que $570
 
 
@@ -185,20 +186,20 @@ console.log("La vendedora elegida vendio " + ventasVendedora("Ada") + " pesos en
 
 function componenteMasVendido() {
     var nuevoArray = []; // cantidad de ventas de cada componente
-    
+
     for (let i = 0; i < local.precios.length; i++) {
-        var arrayComponentes= local.precios[i].componente
-        
+        var arrayComponentes = local.precios[i].componente
+
         // cantidad = cantidadVentasComponente(local.precios[i].componente)
         nuevoArray.push(cantidadVentasComponente(arrayComponentes));
 
     }
     //console.log(nuevoArray)
     console.log("Array de cantidad de ventas por componente ordenado " + nuevoArray.sort())
-    
-    
+
+
     //return arrayComponentes[]
-    return nuevoArray[nuevoArray.length-1];
+    return nuevoArray[nuevoArray.length - 1];
 
 }
 
@@ -225,3 +226,159 @@ function huboVentas(mes, anio) {
 console.log("En el mes seleccionado hubo ventas: " + huboVentas(3, 2019)); // false
 
 // console.log( huboVentas(3, 2019) ); // false
+
+
+//////////////////////////////// PARTE 2 ///////////////////////////////
+
+
+// Nueva sucursal en Caballito, datos de las ventas también tienen el nombre de la sucursal en la cual se realizó. 
+//Por ejemplo: { fecha: new Date(2019, 1, 1), nombreVendedora: "Ada", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1500"], sucursal: 'Centro' }. Por este cambio, se pide:
+
+
+//PUNTO DOS A
+// En las ventas ya existentes, tenemos que agregar la propiedad sucursal con el valor Centro (ya que es la sucursal original).
+
+for (let i = 0; i < local.ventas.length; i++) {
+    local.ventas[i].sucursal = "Centro";
+    console.log(local.ventas[i]);
+}
+
+//PUNTO DOS B
+// Agregar al objeto principal la propiedad sucursales: ['Centro', 'Caballito']
+
+local.sucursales = ["Centro", "Caballito"];
+console.log(local)
+
+//PUNTO DOS C
+// Cargar la siguiente información en el array ventas, creando sus respectivos objetos 
+//siguiendo el patrón: fecha, nombreVendedora, componentes, sucursal
+
+function nuevasVentas(fecha, nombreVendedora, componentes, sucursal) {
+    local.ventas.push({ fecha, nombreVendedora, componentes, sucursal })
+    return
+}
+
+nuevasVentas(new Date(2019, 2, 12), "Hedy", ["Monitor GPRS 3000", "HDD Toyiva"], "Centro");
+nuevasVentas(new Date(2019, 2, 24), "Sheryl", ["Motherboard ASUS 1500", "HDD Wezter Dishital"], "Caballito")
+nuevasVentas(new Date(2019, 2, 1), "Ada", ["Motherboard MZI", "RAM Quinston Fury"], "Centro")
+nuevasVentas(new Date(2019, 2, 11), "Grace", ["Monitor ASC 543", "RAM Quinston"], "Caballito")
+nuevasVentas(new Date(2019, 2, 15), "Ada", ["Motherboard ASUS 1200", "RAM Quinston Fury"], "Centro")
+nuevasVentas(new Date(2019, 2, 12), "Hedy", ["Motherboard ASUS 1500", "HDD Toyiva"], "Caballito")
+nuevasVentas(new Date(2019, 2, 21), "Grace", ["Motherboard MZI", "RAM Quinston"], "Centro")
+nuevasVentas(new Date(2019, 2, 08), "Sheryl", ["Monitor ASC 543", "HDD Wezter Dishital"], "Centro")
+nuevasVentas(new Date(2019, 2, 16), "Sheryl", ["Monitor GPRS 3000", "RAM Quinston Fury"], "Centro")
+nuevasVentas(new Date(2019, 2, 27), "Hedy", ["Motherboard ASUS 1200", "HDD Toyiva"], "Caballito")
+nuevasVentas(new Date(2019, 2, 22), "Grace", ["Monitor ASC 543", "HDD Wezter Dishital"], "Centro")
+nuevasVentas(new Date(2019, 2, 05), "Ada", ["Motherboard ASUS 1500", "RAM Quinston"], "Centro")
+nuevasVentas(new Date(2019, 2, 01), "Grace", ["Motherboard MZI", "HDD Wezter Dishital"], "Centro")
+nuevasVentas(new Date(2019, 2, 07), "Sheryl", ["Monitor GPRS 3000", "RAM Quinston"], "Caballito")
+nuevasVentas(new Date(2019, 2, 14), "Ada", ["Motherboard ASUS 1200", "HDD Toyiva"], "Centro")
+
+console.log(local.ventas)
+
+//PUNTO DOS D
+// Crear la función ventasSucursal(sucursal), que obtiene las ventas totales realizadas por una sucursal sin límite de fecha.
+
+function ventasSucursal(sucursales) {
+    var montoTotal = 0;
+    var sucursalElegida = [];
+    for (let i = 0; i < local.ventas.length; i++) {
+        if (local.ventas[i].sucursal === sucursales) {
+            sucursalElegida.push(local.ventas[i].componentes)
+        }
+    }
+    for (let j = 0; j < sucursalElegida.length; j++) {
+        montoTotal = montoTotal + precioMaquina(sucursalElegida[j]);
+
+    }
+    return montoTotal;
+}
+
+
+console.log("La sucursal elegida vendió: " + ventasSucursal("Centro")); // 4195
+
+
+//PUNTO DOS E
+// Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad 
+//pero trabajando con una propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
+
+//PUNTO DOS F
+// Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, (mes, anio) y 
+//devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. 
+//El importe de una venta es el que indica la función precioMaquina.
+
+function sucursalDelMes(mes, anio) {
+    var sucursalUno = [];
+    var sucursalDos = [];
+
+    for (let i = 0; i < local.ventas.length; i++) {
+        //console.log(local.ventas[i].sucursal)
+        var lasFechas = local.ventas[i].fecha
+        var lasSucursales = local.ventas[i].sucursal
+        var losComponentes = local.ventas[i].componentes
+
+        if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
+            //console.log("hola")
+
+            for (let k = 0; k < losComponentes.length; k++) {
+                if (lasSucursales === "Centro") {
+                    sucursalUno.push(losComponentes[k])
+
+                } else if (lasSucursales === "Caballito") {
+                    sucursalDos.push(losComponentes[k])
+                }
+            }
+        }
+    }
+
+    if (precioMaquina(sucursalUno) < precioMaquina(sucursalDos)) {
+        return "La sucursal que mas vendió es Caballito";
+    } else if (precioMaquina(sucursalUno) > precioMaquina(sucursalDos)) {
+        return "La sucursal que mas vendió es Centro";
+    }
+
+}
+
+
+console.log(sucursalDelMes(1, 2019) ); // "Centro"
+
+
+///////////////////////////// PARTE 3 ///////////////////////////////
+
+//Para tener una mejor muestra de como está resultando el local, queremos desarrollar un reporte que nos muestre 
+//las ventas por sucursal y por mes. Para esto, necesitamos crear las siguientes funciones:
+
+// PUNTO TRES A
+
+//renderPorMes() //Muestra una lista ordenada del importe total vendido por cada mes/año
+
+//console.log( renderPorMes() );
+// Ventas por mes:
+//   Total de enero 2019: 1250
+//   Total de febrero 2019: 4210
+
+
+
+//PUNTO TRES B
+
+// renderPorSucursal() // Muestra una lista del importe total vendido por cada sucursal
+
+// console.log( renderPorSucursal() );
+// Ventas por sucursal:
+//   Total de Centro: 4195
+//   Total de Caballito: 1265
+
+
+//PUNTO TRES C
+
+// render() // Tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y la vendedora que más ingresos generó
+// console.log( render() );
+// Reporte
+// Ventas por mes:
+//   Total de enero 2019: 1250
+//   Total de febrero 2019: 4210
+// Ventas por sucursal:
+//   Total de Centro: 4195
+//   Total de Caballito: 1265
+// Producto estrella: Monitor GPRS 3000
+// Vendedora que más ingresos generó: Grace
