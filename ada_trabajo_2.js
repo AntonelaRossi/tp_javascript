@@ -40,7 +40,6 @@ function precioMaquina(componentes) {
             }
         }
     }
-
     // console.log(sumaComponente)
     return sumaComponente;
 }
@@ -48,7 +47,6 @@ function precioMaquina(componentes) {
 var ventaDelDia = ["Monitor GPRS 3000", "Motherboard ASUS 1500", "Monitor ASC 543"];
 console.log("1.A");
 console.log("La suma de los componentes es: " + precioMaquina(ventaDelDia)); // 320 ($200 del monitor + $120 del motherboard) // le agregue otro componente asi que $570
-
 
 
 //HECHO PUNTO UNO B
@@ -80,99 +78,64 @@ console.log("El componente se vendio " + cantidadVentasComponente("Monitor ASC 5
 //en plata en el mes. O sea no cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica 
 //la función precioMaquina.
 //Date.getMonth() y Date.getFullYear()
-//ventas: [ { fecha: new Date(2019, 1, 4), nombreVendedora: "Grace", componentes: ["Monitor GPRS 3000", "Motherboard ASUS 1500"] },
 
-//entrar a local.ventas para llegar a fecha. en fecha, comparar mes y anio con get month y get full year
-// pushear componentes por vendedora 
-// monto de plata por vendedora con precioMaquina
-// if vendedora uno mayor que dos gana
+
 
 function vendedoraDelMes(mes, anio) {
 
-    var objetoVendedoras = {
-        nombre: [],
-        dinero: [],
-    }
-    for (let w = 0; w < local.vendedoras.length; w++) {
-        objetoVendedoras.nombre.push(local.vendedoras[w]);
-        
-    }
-    
-    console.log(objetoVendedoras.nombre)
+    var ventasVendedoras = []//lo que quiero es que aca esten los objetos vendedoras con nombre y dinero de cada una
+    //en teoria armo estos objetos
+    //ventas mes = [
+    //     {
+    //         nombre: "",
+    //         vendio: $$$
+    //     }
+    // ]
 
-    for (let i = 0; i < local.ventas.length; i++) {
-        if (mes - 1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()) {
-            
-            for (let k = 0; k < objetoVendedoras.nombre.length; k++) {
-                console.log(objetoVendedoras.nombre.length);
-                
-                if(objetoVendedoras.nombre[k] === local.ventas[i].nombreVendedora){
-                //  console.log("gol");
-                objetoVendedoras.dinero.push(precioMaquina(local.ventas[i].componentes))
-                    
-                }
-                
+
+    for (var i = 0; i < local.ventas.length; i++) {
+        if (local.ventas[i].fecha.getFullYear() === anio && local.ventas[i].fecha.getMonth() === mes - 1) { //valido el periodo de tiempo
+            var valorVentas = precioMaquina(local.ventas[i].componentes); // valor en $$ de array de componentes
+
+            for (let g = 0; g < ventasVendedoras.length; g++) { //recorro ventasMes para indexOf
+                // console.log(ventasMes.length);
+                var indiceNombres = ventasVendedoras[g].nombre.indexOf(local.ventas[i].nombreVendedora);
+                // console.log(ventasMes[g].nombre)
+                // console.log(local.ventas[i].nombreVendedora)
+                console.log(indiceNombres);
             }
-            
-            // for (let j = 0; j < objetoVendedoras.nombre.length; j++) {
-            //     console.log(objetoVendedoras.nombre[i]);
-            //     if(objetoVendedoras.nombre.indexOf(local.ventas[i].nombreVendedora != 0)) {
-            //      console.log("gol")   
-            //     }
-                
-            // }
+
+            //PORQUE ODIAS MIS IF SEÑORRRRRRRRRRR
+            //no se porque no me anda el indexOf entonces no entra al bendito IF, entonces me crea igual 4 vendedoras
+            //si el indice es mayor a -1 es porque ya esta lleno, else, deberia armar otro, la primera vez los llena porque estan vacios y cuando se repite else
+            if (indiceNombres > -1) {
+                console.log("caca")
+                ventasVendedoras[indiceNombres].vendio += valorVentas;
+            } else { //si no hay, creame el objeto
+                var objetoVendedora = {
+                    nombre: local.ventas[i].nombreVendedora,
+                    vendio: valorVentas, //es el precioMaquina(local.ventas[i].componentes) 
+                }
+                //console.log(ventasVendedoras)
+                ventasVendedoras.push(objetoVendedora)
+            }
         }
-
-        
-
-
     }
- 
-    console.log(objetoVendedoras.dinero)
-    var mayorDinero = objetoVendedoras.dinero.indexOf(Math.max.apply(null, (objetoVendedoras.dinero)));
-    //console.log(indiceCantidadMasVen)
+    console.log(ventasVendedoras)
 
-    return objetoVendedoras.nombre[mayorDinero]
+    var vendedoraEstrella = 0;
+
+    for (var i = 0; i < ventasVendedoras.length; i++) {
+        while (ventasVendedoras[i].vendio > vendedoraEstrella) {
+            vendedoraEstrella = ventasVendedoras[i].vendio
+
+            return ventasVendedoras[i]//devuelve el objeto YOU WISHHH
+        }
+    }
 }
 
 console.log("1.C")
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
-
-// function vendedoraDelMes(mes, anio) {
-//     var nombreVendeUno = [];
-//     var nombreVendeDos = [];
-
-//     for (let i = 0; i < local.ventas.length; i++) {
-//         
-//         var lasVendedoras = local.ventas[i].nombreVendedora
-//         var losComponentes = local.ventas[i].componentes
-//         //console.log(lasFechas);   
-//         //console.log(lasVendedoras);
-//         //console.log(losComponentes);
-
-//         if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
-//             //console.log("la hacemo no la hacemo");
-
-//             for (let k = 0; k < losComponentes.length; k++) {
-//                 if (lasVendedoras === "Grace") {
-//                     nombreVendeUno.push(losComponentes[k])
-//                     //console.log("mi vendedora es Grace, la vuelta es la " +[k] + " los componentes son " + nombreVendeUno);
-
-//                 } else if (lasVendedoras === "Ada") {
-//                     nombreVendeDos.push(losComponentes[k])
-//                     //console.log("mi vendedora es Ada, la vuelta es la " +[k] + " los componentes son " + nombreVendeDos);
-//                 }
-//             }
-//         }
-//     }
-
-//     if (precioMaquina(nombreVendeUno) < precioMaquina(nombreVendeDos)) {
-//         return "La vendedora mas champion es Ada";
-//     } else if (precioMaquina(nombreVendeUno) > precioMaquina(nombreVendeDos)) {
-//         return "La vendedora mas champion es Grace";
-//     }
-
-// }
 
 
 
@@ -361,7 +324,7 @@ console.log("La sucursal elegida vendió: " + ventasSucursal("Centro")); // 4195
 //pero trabajando con una propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
 
 console.log("2.E")
-console.log("LO UNICO QUE CAMBIA ES LA CONDICION DEL IF, es algo con this!? ---- if (local.ventas[i].nombreVendedora === nombreV) ---- if (local.ventas[i].sucursal === sucursales) ----" +
+console.log("LO UNICO QUE CAMBIA ES LA CONDICION DEL IF ---- if (local.ventas[i].nombreVendedora === nombreV) ---- if (local.ventas[i].sucursal === sucursales) ----" +
     "El primer termino hasta entrar al objeto LOCAL y al array VENTAS es igual, lo que cambia es la propiedad de ese objeto que necesitamos. El segundo termino entra por parametro")
 
 
