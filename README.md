@@ -22,7 +22,7 @@ Terminado
 
 1F componenteMasVendido()
 Retorna String del componente mas vendido
-ESTO NO ME SALE, no se como retornar el nombre del componente
+Terminado
 
 1G huboVentas(mes, anio)
 Retorna true o false si hubo ventas o no

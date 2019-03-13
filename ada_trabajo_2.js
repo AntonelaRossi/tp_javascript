@@ -88,42 +88,92 @@ console.log("El componente se vendio " + cantidadVentasComponente("Monitor ASC 5
 // if vendedora uno mayor que dos gana
 
 function vendedoraDelMes(mes, anio) {
-    var nombreVendeUno = [];
-    var nombreVendeDos = [];
+
+    var objetoVendedoras = {
+        nombre: [],
+        dinero: [],
+    }
+    for (let w = 0; w < local.vendedoras.length; w++) {
+        objetoVendedoras.nombre.push(local.vendedoras[w]);
+        
+    }
+    
+    console.log(objetoVendedoras.nombre)
 
     for (let i = 0; i < local.ventas.length; i++) {
-        var lasFechas = local.ventas[i].fecha
-        var lasVendedoras = local.ventas[i].nombreVendedora
-        var losComponentes = local.ventas[i].componentes
-        //console.log(lasFechas);   
-        //console.log(lasVendedoras);
-        //console.log(losComponentes);
-
-        if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
-            //console.log("la hacemo no la hacemo");
-
-            for (let k = 0; k < losComponentes.length; k++) {
-                if (lasVendedoras === "Grace") {
-                    nombreVendeUno.push(losComponentes[k])
-                    //console.log("mi vendedora es Grace, la vuelta es la " +[k] + " los componentes son " + nombreVendeUno);
-
-                } else if (lasVendedoras === "Ada") {
-                    nombreVendeDos.push(losComponentes[k])
-                    //console.log("mi vendedora es Ada, la vuelta es la " +[k] + " los componentes son " + nombreVendeDos);
+        if (mes - 1 === local.ventas[i].fecha.getMonth() && anio === local.ventas[i].fecha.getFullYear()) {
+            
+            for (let k = 0; k < objetoVendedoras.nombre.length; k++) {
+                console.log(objetoVendedoras.nombre.length);
+                
+                if(objetoVendedoras.nombre[k] === local.ventas[i].nombreVendedora){
+                //  console.log("gol");
+                objetoVendedoras.dinero.push(precioMaquina(local.ventas[i].componentes))
+                    
                 }
+                
             }
+            
+            // for (let j = 0; j < objetoVendedoras.nombre.length; j++) {
+            //     console.log(objetoVendedoras.nombre[i]);
+            //     if(objetoVendedoras.nombre.indexOf(local.ventas[i].nombreVendedora != 0)) {
+            //      console.log("gol")   
+            //     }
+                
+            // }
         }
-    }
 
-    if (precioMaquina(nombreVendeUno) < precioMaquina(nombreVendeDos)) {
-        return "La vendedora mas champion es Ada";
-    } else if (precioMaquina(nombreVendeUno) > precioMaquina(nombreVendeDos)) {
-        return "La vendedora mas champion es Grace";
-    }
+        
 
+
+    }
+ 
+    console.log(objetoVendedoras.dinero)
+    var mayorDinero = objetoVendedoras.dinero.indexOf(Math.max.apply(null, (objetoVendedoras.dinero)));
+    //console.log(indiceCantidadMasVen)
+
+    return objetoVendedoras.nombre[mayorDinero]
 }
+
 console.log("1.C")
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+
+// function vendedoraDelMes(mes, anio) {
+//     var nombreVendeUno = [];
+//     var nombreVendeDos = [];
+
+//     for (let i = 0; i < local.ventas.length; i++) {
+//         
+//         var lasVendedoras = local.ventas[i].nombreVendedora
+//         var losComponentes = local.ventas[i].componentes
+//         //console.log(lasFechas);   
+//         //console.log(lasVendedoras);
+//         //console.log(losComponentes);
+
+//         if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
+//             //console.log("la hacemo no la hacemo");
+
+//             for (let k = 0; k < losComponentes.length; k++) {
+//                 if (lasVendedoras === "Grace") {
+//                     nombreVendeUno.push(losComponentes[k])
+//                     //console.log("mi vendedora es Grace, la vuelta es la " +[k] + " los componentes son " + nombreVendeUno);
+
+//                 } else if (lasVendedoras === "Ada") {
+//                     nombreVendeDos.push(losComponentes[k])
+//                     //console.log("mi vendedora es Ada, la vuelta es la " +[k] + " los componentes son " + nombreVendeDos);
+//                 }
+//             }
+//         }
+//     }
+
+//     if (precioMaquina(nombreVendeUno) < precioMaquina(nombreVendeDos)) {
+//         return "La vendedora mas champion es Ada";
+//     } else if (precioMaquina(nombreVendeUno) > precioMaquina(nombreVendeDos)) {
+//         return "La vendedora mas champion es Grace";
+//     }
+
+// }
+
 
 
 //HECHO PUNTO UNO D
@@ -186,23 +236,25 @@ console.log("La vendedora elegida vendio " + ventasVendedora("Ada") + " pesos en
 // las cantidades me deben coincidir con los componentes tal componente tal cantidad
 
 function componenteMasVendido() {
-    var nuevoArray = []; // cantidad de ventas de cada componente
+
+    var objetoData = {
+        nombre: [],
+        cantidad: [],
+    }
 
     for (let i = 0; i < local.precios.length; i++) {
-        var arrayComponentes = local.precios[i].componente
-
-        // cantidad = cantidadVentasComponente(local.precios[i].componente)
-        nuevoArray.push(cantidadVentasComponente(arrayComponentes));
-
+        objetoData.nombre.push(local.precios[i].componente);
+        objetoData.cantidad.push(cantidadVentasComponente(local.precios[i].componente));
     }
-    //console.log(nuevoArray)
-    //console.log("Array de cantidad de ventas por componente ordenado " + nuevoArray.sort())
 
+    var indiceCantidadMasVen = objetoData.cantidad.indexOf(Math.max.apply(null, (objetoData.cantidad)));
+    //console.log(indiceCantidadMasVen)
 
-    //return arrayComponentes[]
-    return nuevoArray[nuevoArray.length - 1];
+    return objetoData.nombre[indiceCantidadMasVen]
 
+    //console.log(objetoData)
 }
+
 console.log("1.F")
 console.log("El componente mas vendido es: " + componenteMasVendido()); // Monitor GPRS 3000
 
@@ -414,11 +466,11 @@ function render() {
 
     //for (let i = 0; i < local.vendedoras.length; i++) {
     //    arrayVendedoras.push(ventasVendedora(local.vendedoras[i]));
-    
+
     //}
     //console.log(arrayVendedoras)
 
-    return "Reporte" + "\n" + renderPorMes() + "\n" + renderPorSucursal() + "\n" + "Producto estrella: " + componenteMasVendido() + "\n" 
+    return "Reporte" + "\n" + renderPorMes() + "\n" + renderPorSucursal() + "\n" + "Producto estrella: " + componenteMasVendido() + "\n"
 }
 
 console.log(render());
