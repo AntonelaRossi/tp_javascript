@@ -84,43 +84,6 @@ console.log("El componente se vendio " + cantidadVentasComponente("Monitor ASC 5
 function vendedoraDelMes(mes, anio) {
     var nuevoArray = [];
 
-<<<<<<< Updated upstream
-    var ventasVendedoras = []//lo que quiero es que aca esten los objetos vendedoras con nombre y dinero de cada una
-    //en teoria armo estos objetos
-    //ventas mes = [
-    //     {
-    //         nombre: "",
-    //         vendio: $$$
-    //     }
-    // ]
-
-
-    for (var i = 0; i < local.ventas.length; i++) {
-        if (local.ventas[i].fecha.getFullYear() === anio && local.ventas[i].fecha.getMonth() === mes - 1) { //valido el periodo de tiempo
-            var valorVentas = precioMaquina(local.ventas[i].componentes); // valor en $$ de array de componentes
-
-            for (let g = 0; g < ventasVendedoras.length; g++) { //recorro ventasMes para indexOf
-                // console.log(ventasMes.length);
-                var indiceNombres = ventasVendedoras[g].nombre.indexOf(local.ventas[i].nombreVendedora);
-                // console.log(ventasMes[g].nombre)
-                // console.log(local.ventas[i].nombreVendedora)
-                console.log(indiceNombres);
-            }
-
-            //PORQUE ODIAS MIS IF SEÑORRRRRRRRRRR
-            //no se porque no me anda el indexOf entonces no entra al bendito IF, entonces me crea igual 4 vendedoras
-            //si el indice es mayor a -1 es porque ya esta lleno, else, deberia armar otro, la primera vez los llena porque estan vacios y cuando se repite else
-            if (indiceNombres > -1) {
-                console.log("caca")
-                ventasVendedoras[indiceNombres].vendio += valorVentas;
-            } else { //si no hay, creame el objeto
-                var objetoVendedora = {
-                    nombre: local.ventas[i].nombreVendedora,
-                    vendio: valorVentas, //es el precioMaquina(local.ventas[i].componentes) 
-                }
-                //console.log(ventasVendedoras)
-                ventasVendedoras.push(objetoVendedora)
-=======
     for (let i = 0; i < local.vendedoras.length; i++) {
         var objetoVendedora = {
             nombre: local.vendedoras[i],
@@ -142,50 +105,35 @@ function vendedoraDelMes(mes, anio) {
                         objetoVendedora.dineroVendido = objetoVendedora.dineroVendido + precioComponentes;
                     }
                 }
->>>>>>> Stashed changes
             }
         }
     }
     console.log(ventasVendedoras)
 
-<<<<<<< Updated upstream
-    var vendedoraEstrella = 0;
-
-    for (var i = 0; i < ventasVendedoras.length; i++) {
-        while (ventasVendedoras[i].vendio > vendedoraEstrella) {
-            vendedoraEstrella = ventasVendedoras[i].vendio
-
-            return ventasVendedoras[i]//devuelve el objeto YOU WISHHH
-        }
-    }
-=======
-        nuevoArray.push(objetoVendedora)
-    }
-
-    var vendedoraMaxima;
-    var ventaMaxima = 0
-  
-    for (let k = 0; k < nuevoArray.length; k++) {
-        // console.log(nuevoArray[k].dineroVendido)
-        
-        if (nuevoArray[k].dineroVendido > ventaMaxima) {
-            ventaMaxima = nuevoArray[k].dineroVendido;
-            vendedoraMaxima = nuevoArray[k].nombre;
-            return "La vendedora que mas vendio es " + vendedoraMaxima
-        }
-      
-    }
-        
-    console.log(nuevoArray)
-
-    // return objetoVendedora
->>>>>>> Stashed changes
+    nuevoArray.push(objetoVendedora)
 }
+
+var vendedoraMaxima;
+var ventaMaxima = 0
+
+for (let k = 0; k < nuevoArray.length; k++) {
+    // console.log(nuevoArray[k].dineroVendido)
+
+    if (nuevoArray[k].dineroVendido > ventaMaxima) {
+        ventaMaxima = nuevoArray[k].dineroVendido;
+        vendedoraMaxima = nuevoArray[k].nombre;
+        return "La vendedora que mas vendio es " + vendedoraMaxima
+    }
+
+}
+
+console.log(nuevoArray)
+
+// return objetoVendedora
+
 console.log("1.C")
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
-<<<<<<< Updated upstream
-=======
 
 
 // VERSION HARDCODEO
@@ -225,7 +173,6 @@ console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina d
 
 // }
 
->>>>>>> Stashed changes
 
 
 //HECHO PUNTO UNO D
@@ -413,13 +360,8 @@ console.log("La sucursal elegida vendió: " + ventasSucursal("Centro")); // 4195
 //pero trabajando con una propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
 
 console.log("2.E")
-<<<<<<< Updated upstream
-console.log("LO UNICO QUE CAMBIA ES LA CONDICION DEL IF ---- if (local.ventas[i].nombreVendedora === nombreV) ---- if (local.ventas[i].sucursal === sucursales) ----" +
-    "El primer termino hasta entrar al objeto LOCAL y al array VENTAS es igual, lo que cambia es la propiedad de ese objeto que necesitamos. El segundo termino entra por parametro")
-=======
 console.log("LO UNICO QUE CAMBIA ES LA CONDICION DEL IF: if (local.ventas[i].nombreVendedora === param) ---- if (local.ventas[i].sucursal === param) ----" +
     "se podria poner un Or || en la condicion del if para que solo dependa de lo que entra por parametro")
->>>>>>> Stashed changes
 
 
 //PUNTO DOS F
@@ -456,17 +398,17 @@ function sucursalDelMes(mes, anio) {
 
     var sucursalMaxima;
     var ventaMaxima = 0
-  
-    
+
+
     for (let k = 0; k < nuevoArray.length; k++) {
         // console.log(nuevoArray[k].dineroVendido)
-        
+
         if (nuevoArray[k].dineroVendido > ventaMaxima) {
             ventaMaxima = nuevoArray[k].dineroVendido;
             sucursalMaxima = nuevoArray[k].sucursal;
             return "La sucursal que mas vendio es " + sucursalMaxima
         }
-      
+
     }
 
     //console.log(nuevoArray)
@@ -541,16 +483,16 @@ function renderPorMes() {
     //     12: "Diciembre",
     // }
 
-var meses= {
-    mesesNumero : [1,2,3,4,5,6,7,8,9,10,11,12],
-    mesesPalabra : ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-}
+    var meses = {
+        mesesNumero: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        mesesPalabra: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+    }
 
     for (let i = 0; i < meses.mesesNumero.length; i++) {
-        if (huboVentas(meses.mesesNumero[i],2019)){
-            return "Ventas por mes" + "\n" + "Total de " + meses.mesesPalabra[i] + ":"  + ventasMes(meses.mesesNumero[i], 2019) + "\n" + "Total de Febrero: " + ventasMes(meses.mesesNumero[i], 2019);
+        if (huboVentas(meses.mesesNumero[i], 2019)) {
+            return "Ventas por mes" + "\n" + "Total de " + meses.mesesPalabra[i] + ":" + ventasMes(meses.mesesNumero[i], 2019) + "\n" + "Total de Febrero: " + ventasMes(meses.mesesNumero[i], 2019);
         }
-    
+
     }
 
     console.log(meses[1])
@@ -597,12 +539,12 @@ console.log("3.C");
 function render() {
     var arrayVendedoras = [];
     for (let i = 0; i < local.vendedoras.length; i++) {
-       var ventasLocas = local.vendedoras[i] +  " vendio: " + ventasVendedora(local.vendedoras[i]);
-       console.log(ventasLocas);
+        var ventasLocas = local.vendedoras[i] + " vendio: " + ventasVendedora(local.vendedoras[i]);
+        console.log(ventasLocas);
     }
 
     for (let i = 0; i < local.vendedoras.length; i++) {
-       arrayVendedoras.push(ventasVendedora(local.vendedoras[i]));
+        arrayVendedoras.push(ventasVendedora(local.vendedoras[i]));
     }
     console.log(arrayVendedoras)
 
