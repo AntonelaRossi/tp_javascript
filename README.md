@@ -10,7 +10,7 @@ Terminado
 
 1C vendedoraMes(mes, anio)
 Retorna string
-Terminado pero puede mejorar con Variables dinamicas (?)
+Terminado
 
 1D OK ventasMes(mes, anio)
 Retorna $$ suma total por mes
@@ -47,9 +47,7 @@ ME DOY CUENTA QUE PASA PERO NO CUAL ES LA SOLUCION
 
 2F sucursalDelMes(mes, anio)
 Retorna string Sucursal que mas vendio
-Terminado pero puede mejorar con Variables dinamicas (?)
-(es igual al 1C)
-
+Terminado 
 
 3A renderPorMes()
 Terminado

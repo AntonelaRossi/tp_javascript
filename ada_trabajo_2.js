@@ -82,7 +82,9 @@ console.log("El componente se vendio " + cantidadVentasComponente("Monitor ASC 5
 
 
 function vendedoraDelMes(mes, anio) {
+    var nuevoArray = [];
 
+<<<<<<< Updated upstream
     var ventasVendedoras = []//lo que quiero es que aca esten los objetos vendedoras con nombre y dinero de cada una
     //en teoria armo estos objetos
     //ventas mes = [
@@ -118,11 +120,35 @@ function vendedoraDelMes(mes, anio) {
                 }
                 //console.log(ventasVendedoras)
                 ventasVendedoras.push(objetoVendedora)
+=======
+    for (let i = 0; i < local.vendedoras.length; i++) {
+        var objetoVendedora = {
+            nombre: local.vendedoras[i],
+            dineroVendido: 0,
+        }
+
+        for (let z = 0; z < local.ventas.length; z++) { //4 vueltas
+
+            if (mes - 1 === local.ventas[z].fecha.getMonth() && anio === local.ventas[z].fecha.getFullYear()) {
+                var precioComponentes = precioMaquina(local.ventas[z].componentes)
+
+
+
+                if (local.ventas[z].nombreVendedora === local.vendedoras[i]) {
+                    //console.log(local.ventas[z].nombreVendedora)
+
+                    if (objetoVendedora.nombre === local.ventas[z].nombreVendedora) {
+
+                        objetoVendedora.dineroVendido = objetoVendedora.dineroVendido + precioComponentes;
+                    }
+                }
+>>>>>>> Stashed changes
             }
         }
     }
     console.log(ventasVendedoras)
 
+<<<<<<< Updated upstream
     var vendedoraEstrella = 0;
 
     for (var i = 0; i < ventasVendedoras.length; i++) {
@@ -132,11 +158,74 @@ function vendedoraDelMes(mes, anio) {
             return ventasVendedoras[i]//devuelve el objeto YOU WISHHH
         }
     }
-}
+=======
+        nuevoArray.push(objetoVendedora)
+    }
 
+    var vendedoraMaxima;
+    var ventaMaxima = 0
+  
+    for (let k = 0; k < nuevoArray.length; k++) {
+        // console.log(nuevoArray[k].dineroVendido)
+        
+        if (nuevoArray[k].dineroVendido > ventaMaxima) {
+            ventaMaxima = nuevoArray[k].dineroVendido;
+            vendedoraMaxima = nuevoArray[k].nombre;
+            return "La vendedora que mas vendio es " + vendedoraMaxima
+        }
+      
+    }
+        
+    console.log(nuevoArray)
+
+    // return objetoVendedora
+>>>>>>> Stashed changes
+}
 console.log("1.C")
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
+<<<<<<< Updated upstream
+=======
+
+
+// VERSION HARDCODEO
+// function vendedoraDelMes(mes, anio) {
+//     var nombreVendeUno = [];
+//     var nombreVendeDos = [];
+
+//     for (let i = 0; i < local.ventas.length; i++) {
+//         
+//         var lasVendedoras = local.ventas[i].nombreVendedora
+//         var losComponentes = local.ventas[i].componentes
+//         //console.log(lasFechas);   
+//         //console.log(lasVendedoras);
+//         //console.log(losComponentes);
+
+//         if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
+//             //console.log("la hacemo no la hacemo");
+
+//             for (let k = 0; k < losComponentes.length; k++) {
+//                 if (lasVendedoras === "Grace") {
+//                     nombreVendeUno.push(losComponentes[k])
+//                     //console.log("mi vendedora es Grace, la vuelta es la " +[k] + " los componentes son " + nombreVendeUno);
+
+//                 } else if (lasVendedoras === "Ada") {
+//                     nombreVendeDos.push(losComponentes[k])
+//                     //console.log("mi vendedora es Ada, la vuelta es la " +[k] + " los componentes son " + nombreVendeDos);
+//                 }
+//             }
+//         }
+//     }
+
+//     if (precioMaquina(nombreVendeUno) < precioMaquina(nombreVendeDos)) {
+//         return "La vendedora mas champion es Ada";
+//     } else if (precioMaquina(nombreVendeUno) > precioMaquina(nombreVendeDos)) {
+//         return "La vendedora mas champion es Grace";
+//     }
+
+// }
+
+>>>>>>> Stashed changes
 
 
 //HECHO PUNTO UNO D
@@ -171,12 +260,12 @@ console.log("La suma total del mes es " + ventasMes(1, 2019)); // 1250
 // en local.ventas esta el nombre vendedora y el componente que vendio cada vendedoras
 // precioMaquina es la funcion que suma precio todos los componentes
 
-function ventasVendedora(nombreV) {
+function ventasVendedora(param) {
     var montoTotal = 0; //numero
     var acumulador = []; //array con los componentes que vendio cada una
     for (let i = 0; i < local.ventas.length; i++) {
         //console.log(local.ventas[i].nombreVendedora)
-        if (local.ventas[i].nombreVendedora === nombreV) {
+        if (local.ventas[i].nombreVendedora === param) {
             acumulador.push(local.ventas[i].componentes)
         }
     }
@@ -299,11 +388,11 @@ console.log(local.ventas)
 //PUNTO DOS D
 // Crear la función ventasSucursal(sucursal), que obtiene las ventas totales realizadas por una sucursal sin límite de fecha.
 
-function ventasSucursal(sucursales) {
+function ventasSucursal(param) {
     var montoTotal = 0;
     var acumulador = [];
     for (let i = 0; i < local.ventas.length; i++) {
-        if (local.ventas[i].sucursal === sucursales) {
+        if (local.ventas[i].sucursal === param) {
             acumulador.push(local.ventas[i].componentes)
         }
     }
@@ -324,8 +413,13 @@ console.log("La sucursal elegida vendió: " + ventasSucursal("Centro")); // 4195
 //pero trabajando con una propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
 
 console.log("2.E")
+<<<<<<< Updated upstream
 console.log("LO UNICO QUE CAMBIA ES LA CONDICION DEL IF ---- if (local.ventas[i].nombreVendedora === nombreV) ---- if (local.ventas[i].sucursal === sucursales) ----" +
     "El primer termino hasta entrar al objeto LOCAL y al array VENTAS es igual, lo que cambia es la propiedad de ese objeto que necesitamos. El segundo termino entra por parametro")
+=======
+console.log("LO UNICO QUE CAMBIA ES LA CONDICION DEL IF: if (local.ventas[i].nombreVendedora === param) ---- if (local.ventas[i].sucursal === param) ----" +
+    "se podria poner un Or || en la condicion del if para que solo dependa de lo que entra por parametro")
+>>>>>>> Stashed changes
 
 
 //PUNTO DOS F
@@ -334,39 +428,90 @@ console.log("LO UNICO QUE CAMBIA ES LA CONDICION DEL IF ---- if (local.ventas[i]
 //El importe de una venta es el que indica la función precioMaquina.
 
 function sucursalDelMes(mes, anio) {
-    var sucursalUno = [];
-    var sucursalDos = [];
+    var nuevoArray = [];
 
-    for (let i = 0; i < local.ventas.length; i++) {
-        //console.log(local.ventas[i].sucursal)
-        var lasFechas = local.ventas[i].fecha
-        var lasSucursales = local.ventas[i].sucursal
-        var losComponentes = local.ventas[i].componentes
+    for (let i = 0; i < local.sucursales.length; i++) {
+        var objetoSucursales = {
+            sucursal: local.sucursales[i],
+            dineroVendido: 0,
+        }
 
-        if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
-            //console.log("hola")
+        for (let z = 0; z < local.ventas.length; z++) { //4 vueltas
 
-            for (let k = 0; k < losComponentes.length; k++) {
-                if (lasSucursales === "Centro") {
-                    sucursalUno.push(losComponentes[k])
+            if (mes - 1 === local.ventas[z].fecha.getMonth() && anio === local.ventas[z].fecha.getFullYear()) {
+                var precioComponentes = precioMaquina(local.ventas[z].componentes)
 
-                } else if (lasSucursales === "Caballito") {
-                    sucursalDos.push(losComponentes[k])
+                if (local.ventas[z].sucursal === local.sucursales[i]) {
+                    //console.log(local.ventas[z].nombreVendedora)
+
+                    if (objetoSucursales.sucursal === local.ventas[z].sucursal) {
+
+                        objetoSucursales.dineroVendido = objetoSucursales.dineroVendido + precioComponentes;
+                    }
                 }
             }
         }
+        nuevoArray.push(objetoSucursales)
     }
 
-    if (precioMaquina(sucursalUno) < precioMaquina(sucursalDos)) {
-        return "La sucursal que mas vendió es Caballito";
-    } else if (precioMaquina(sucursalUno) > precioMaquina(sucursalDos)) {
-        return "La sucursal que mas vendió es Centro";
+    var sucursalMaxima;
+    var ventaMaxima = 0
+  
+    
+    for (let k = 0; k < nuevoArray.length; k++) {
+        // console.log(nuevoArray[k].dineroVendido)
+        
+        if (nuevoArray[k].dineroVendido > ventaMaxima) {
+            ventaMaxima = nuevoArray[k].dineroVendido;
+            sucursalMaxima = nuevoArray[k].sucursal;
+            return "La sucursal que mas vendio es " + sucursalMaxima
+        }
+      
     }
+
+    //console.log(nuevoArray)
 
 }
-
 console.log("2.F")
-console.log(sucursalDelMes(1, 2019)); // "Centro"
+console.log(sucursalDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+
+
+//VERSION HARDCODEADA 2F
+
+// function sucursalDelMes(mes, anio) {
+//     var sucursalUno = [];
+//     var sucursalDos = [];
+
+//     for (let i = 0; i < local.ventas.length; i++) {
+//         //console.log(local.ventas[i].sucursal)
+//         var lasFechas = local.ventas[i].fecha
+//         var lasSucursales = local.ventas[i].sucursal
+//         var losComponentes = local.ventas[i].componentes
+
+//         if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
+//             //console.log("hola")
+
+//             for (let k = 0; k < losComponentes.length; k++) {
+//                 if (lasSucursales === "Centro") {
+//                     sucursalUno.push(losComponentes[k])
+
+//                 } else if (lasSucursales === "Caballito") {
+//                     sucursalDos.push(losComponentes[k])
+//                 }
+//             }
+//         }
+//     }
+
+//     if (precioMaquina(sucursalUno) < precioMaquina(sucursalDos)) {
+//         return "La sucursal que mas vendió es Caballito";
+//     } else if (precioMaquina(sucursalUno) > precioMaquina(sucursalDos)) {
+//         return "La sucursal que mas vendió es Centro";
+//     }
+
+// }
+
+// console.log("2.F")
+// console.log(sucursalDelMes(1, 2019)); // "Centro"
 
 
 ///////////////////////////// PARTE 3 ///////////////////////////////
@@ -382,7 +527,35 @@ console.log(sucursalDelMes(1, 2019)); // "Centro"
 //console.log(local.ventas)
 
 function renderPorMes() {
-    return "Ventas por mes" + "\n" + "Total de enero: " + ventasMes(1, 2019) + "\n" + "Total de Febrero: " + ventasMes(2, 2019);
+    // var meses = {
+    //     1: "Enero",
+    //     2: "Febrero",
+    //     3: "Marzo",
+    //     4: "Abril",
+    //     5: "Mayo",
+    //     6: "Junio",
+    //     7: "Julio",
+    //     8: "Agosto",
+    //     9: "Septiembre",
+    //     10: "Octubre",
+    //     11: "Noviembre",
+    //     12: "Diciembre",
+    // }
+
+var meses= {
+    mesesNumero : [1,2,3,4,5,6,7,8,9,10,11,12],
+    mesesPalabra : ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+}
+
+    for (let i = 0; i < meses.mesesNumero.length; i++) {
+        if (huboVentas(meses.mesesNumero[i],2019)){
+            return "Ventas por mes" + "\n" + "Total de " + meses.mesesPalabra[i] + ":"  + ventasMes(meses.mesesNumero[i], 2019) + "\n" + "Total de Febrero: " + ventasMes(meses.mesesNumero[i], 2019);
+        }
+    
+    }
+
+    console.log(meses[1])
+
 }
 
 console.log("3.A");
@@ -390,6 +563,8 @@ console.log(renderPorMes());
 // Ventas por mes:
 //   Total de enero 2019: 1250
 //   Total de febrero 2019: 4210
+
+
 
 
 //PUNTO TRES B
@@ -421,19 +596,18 @@ console.log("3.C");
 
 
 function render() {
-    //var arrayVendedoras = [];
-    //for (let i = 0; i < local.vendedoras.length; i++) {
-    //    var ventasLocas = local.vendedoras[i] +  " vendio: " + ventasVendedora(local.vendedoras[i]);
-    //    console.log(ventasLocas);
-    //}
+    var arrayVendedoras = [];
+    for (let i = 0; i < local.vendedoras.length; i++) {
+       var ventasLocas = local.vendedoras[i] +  " vendio: " + ventasVendedora(local.vendedoras[i]);
+       console.log(ventasLocas);
+    }
 
-    //for (let i = 0; i < local.vendedoras.length; i++) {
-    //    arrayVendedoras.push(ventasVendedora(local.vendedoras[i]));
+    for (let i = 0; i < local.vendedoras.length; i++) {
+       arrayVendedoras.push(ventasVendedora(local.vendedoras[i]));
+    }
+    console.log(arrayVendedoras)
 
-    //}
-    //console.log(arrayVendedoras)
-
-    return "Reporte" + "\n" + renderPorMes() + "\n" + renderPorSucursal() + "\n" + "Producto estrella: " + componenteMasVendido() + "\n"
+    return "Reporte" + "\n" + renderPorMes() + "\n" + renderPorSucursal() + "\n" + "Producto estrella: " + componenteMasVendido() + "\n" + "Vendedora que más ingresos generó: " + vendedoraDelMes()
 }
 
 console.log(render());
