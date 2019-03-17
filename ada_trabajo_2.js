@@ -80,7 +80,6 @@ console.log("El componente se vendio " + cantidadVentasComponente("Monitor ASC 5
 //Date.getMonth() y Date.getFullYear()
 
 
-
 function vendedoraDelMes(mes, anio) {
     var nuevoArray = [];
 
@@ -95,8 +94,6 @@ function vendedoraDelMes(mes, anio) {
             if (mes - 1 === local.ventas[z].fecha.getMonth() && anio === local.ventas[z].fecha.getFullYear()) {
                 var precioComponentes = precioMaquina(local.ventas[z].componentes)
 
-
-
                 if (local.ventas[z].nombreVendedora === local.vendedoras[i]) {
                     //console.log(local.ventas[z].nombreVendedora)
 
@@ -107,30 +104,27 @@ function vendedoraDelMes(mes, anio) {
                 }
             }
         }
-    }
-    console.log(ventasVendedoras)
-
-    nuevoArray.push(objetoVendedora)
-}
-
-var vendedoraMaxima;
-var ventaMaxima = 0
-
-for (let k = 0; k < nuevoArray.length; k++) {
-    // console.log(nuevoArray[k].dineroVendido)
-
-    if (nuevoArray[k].dineroVendido > ventaMaxima) {
-        ventaMaxima = nuevoArray[k].dineroVendido;
-        vendedoraMaxima = nuevoArray[k].nombre;
-        return "La vendedora que mas vendio es " + vendedoraMaxima
+        nuevoArray.push(objetoVendedora)
     }
 
+    var vendedoraMaxima;
+    var ventaMaxima = 0
+
+
+    for (let k = 0; k < nuevoArray.length; k++) {
+        // console.log(nuevoArray[k].dineroVendido)
+
+        if (nuevoArray[k].dineroVendido > ventaMaxima) {
+            ventaMaxima = nuevoArray[k].dineroVendido;
+            vendedoraMaxima = nuevoArray[k].nombre;
+            return "La vendedora que mas vendio es " + vendedoraMaxima + " vendio " + nuevoArray[k].dineroVendido
+        }
+
+    }
+
+    
+
 }
-
-console.log(nuevoArray)
-
-// return objetoVendedora
-
 console.log("1.C")
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
