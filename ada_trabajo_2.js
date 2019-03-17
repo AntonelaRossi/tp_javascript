@@ -475,7 +475,6 @@ function sucursalDelMes(mes, anio) {
 console.log("2.F")
 console.log(sucursalDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
-
 //VERSION HARDCODEADA 2F
 
 // function sucursalDelMes(mes, anio) {
