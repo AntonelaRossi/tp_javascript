@@ -43,17 +43,21 @@ Retorna $$ suma total por Sucursal
 Terminado
 
 2E funciones similares
-ME DOY CUENTA QUE PASA PERO NO CUAL ES LA SOLUCION
+En la condicion del IF van ambas opciones y segun el parametro ingresado, devuelve el nombre de la vendedora o el nombre de la sucursal
+Terminado
 
 2F sucursalDelMes(mes, anio)
 Retorna string Sucursal que mas vendio
 Terminado 
 
 3A renderPorMes()
+Hardcodeado
 Terminado
 
 3B renderPorSucursal()
+Hardcodeado
 Terminado
 
 3C render
-NO SE COMO ASOCIAR LA PLATA A LA VENDEDORA PARA QUE RETORNE EL NOMBRES
+Harcodeado
+

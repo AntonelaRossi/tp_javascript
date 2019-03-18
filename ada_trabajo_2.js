@@ -122,7 +122,7 @@ function vendedoraDelMes(mes, anio) {
 
     }
 
-    
+
 
 }
 console.log("1.C")
@@ -260,8 +260,8 @@ console.log("El componente mas vendido es: " + componenteMasVendido()); // Monit
 
 function huboVentas(mes, anio) {
     for (let i = 0; i < local.ventas.length; i++) {
-        var lasFechas = local.ventas[i].fecha;
-        if (mes - 1 === lasFechas.getMonth() && anio === lasFechas.getFullYear()) {
+
+        if (ventasMes(mes, anio) !== 0) {
             return true
         } else {
             return false
@@ -462,44 +462,54 @@ console.log(sucursalDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de
 //console.log(local.ventas)
 
 function renderPorMes() {
-    // var meses = {
-    //     1: "Enero",
-    //     2: "Febrero",
-    //     3: "Marzo",
-    //     4: "Abril",
-    //     5: "Mayo",
-    //     6: "Junio",
-    //     7: "Julio",
-    //     8: "Agosto",
-    //     9: "Septiembre",
-    //     10: "Octubre",
-    //     11: "Noviembre",
-    //     12: "Diciembre",
-    // }
-
     var meses = {
         mesesNumero: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        mesesPalabra: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+        mesesPalabra: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
+            "Septiembre", "Octubre", "Noviembre", "Diciembre"],
     }
 
     for (let i = 0; i < meses.mesesNumero.length; i++) {
         if (huboVentas(meses.mesesNumero[i], 2019)) {
-            return "Ventas por mes" + "\n" + "Total de " + meses.mesesPalabra[i] + ":" + ventasMes(meses.mesesNumero[i], 2019) + "\n" + "Total de Febrero: " + ventasMes(meses.mesesNumero[i], 2019);
+            console.log("El mes " + meses.mesesPalabra[i] + " vendio: " + ventasMes(meses.mesesNumero[i], 2019))
+            //porque me deja ver meses.mesesPalabra con i si no lo estoy recorriendo?
+
+            //con return solo me retorna un dato
+            //return "El mes " + meses.mesesPalabra[i] + " vendio: " + ventasMes(meses.mesesNumero[i],2019)
         }
-
     }
-
-    console.log(meses[1])
-
 }
 
+// function renderPorMes() {
+//     var meses = {
+//         1: ["Enero", 1],
+//         2: ["Febrero", 2],
+//         3: ["Marzo", 3],
+//         4: ["Abril", 4],
+//         5: ["Mayo", 5],
+//         6: ["Junio", 6],
+//         7: ["Julio", 7],
+//         8: ["Agosto", 8],
+//         9: ["Septiembre", 9],
+//         10: ["Octubre", 10],
+//         11: ["Noviembre", 11],
+//         12: ["Diciembre", 12],
+//     }
+
+//     for (let  i = 1;  i < 13;  i ++) {
+//         console.log()
+//     //    return ventasMes(meses[i],2019);
+
+//     }
+// console.log(meses[1])
+
+// }
+
 console.log("3.A");
+console.log("Ventas por mes")
 console.log(renderPorMes());
 // Ventas por mes:
 //   Total de enero 2019: 1250
 //   Total de febrero 2019: 4210
-
-
 
 
 //PUNTO TRES B
@@ -507,10 +517,16 @@ console.log(renderPorMes());
 // renderPorSucursal() // Muestra una lista del importe total vendido por cada sucursal
 
 function renderPorSucursal() {
-    return "Ventas por sucursal" + "\n" + "Total Sucursal Centro: " + ventasSucursal("Centro") + "\n" + "Total Sucursal Caballito: " + ventasSucursal("Caballito");
+
+    for (let i = 0; i < local.sucursales.length; i++) {
+        console.log("El local " + local.sucursales[i] + " vendió " + ventasSucursal(local.sucursales[i]));
+
+    }
+
 }
 
 console.log("3.B")
+console.log("Ventas por sucursal")
 console.log(renderPorSucursal());
 // Ventas por sucursal:
 //   Total de Centro: 4195
@@ -521,7 +537,7 @@ console.log(renderPorSucursal());
 
 // render() // Tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y la vendedora que más ingresos generó
 
-console.log("3.C");
+
 
 //console.log("Grace vendio: " + ventasVendedora("Grace"));
 //console.log("Ada vendio: " +ventasVendedora("Ada"));
@@ -530,22 +546,29 @@ console.log("3.C");
 
 
 
-function render() {
-    var arrayVendedoras = [];
-    for (let i = 0; i < local.vendedoras.length; i++) {
-        var ventasLocas = local.vendedoras[i] + " vendio: " + ventasVendedora(local.vendedoras[i]);
-        console.log(ventasLocas);
-    }
+// function render() {
+//     var arraysLocos = [];
+//     var mesesNumero = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
-    for (let i = 0; i < local.vendedoras.length; i++) {
-        arrayVendedoras.push(ventasVendedora(local.vendedoras[i]));
-    }
-    console.log(arrayVendedoras)
+//     for (let i = 0; i < mesesNumero.length; i++) {
+//         arraysLocos.push(vendedoraDelMes(mesesNumero[i],2019))
+        
+//     }
 
-    return "Reporte" + "\n" + renderPorMes() + "\n" + renderPorSucursal() + "\n" + "Producto estrella: " + componenteMasVendido() + "\n" + "Vendedora que más ingresos generó: " + vendedoraDelMes()
-}
+//     console.log(arraysLocos);
 
-console.log(render());
+// }
+
+
+
+
+
+
+
+
+
+// console.log("3.C");
+// console.log(render());
 // Reporte
 // Ventas por mes:
 //   Total de enero 2019: 1250
