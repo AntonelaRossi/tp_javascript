@@ -462,6 +462,8 @@ console.log(sucursalDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de
 //console.log(local.ventas)
 
 function renderPorMes() {
+    console.log("Ventas por mes")
+    var stringMuyLargo = ""
     var meses = {
         mesesNumero: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         mesesPalabra: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto",
@@ -470,42 +472,19 @@ function renderPorMes() {
 
     for (let i = 0; i < meses.mesesNumero.length; i++) {
         if (huboVentas(meses.mesesNumero[i], 2019)) {
-            console.log("El mes " + meses.mesesPalabra[i] + " vendio: " + ventasMes(meses.mesesNumero[i], 2019))
+            stringMuyLargo = stringMuyLargo + "El mes " + meses.mesesPalabra[i] + " vendio: " + ventasMes(meses.mesesNumero[i], 2019) + "\n";
             //porque me deja ver meses.mesesPalabra con i si no lo estoy recorriendo?
 
             //con return solo me retorna un dato
             //return "El mes " + meses.mesesPalabra[i] + " vendio: " + ventasMes(meses.mesesNumero[i],2019)
         }
+        
     }
+    return stringMuyLargo
 }
 
-// function renderPorMes() {
-//     var meses = {
-//         1: ["Enero", 1],
-//         2: ["Febrero", 2],
-//         3: ["Marzo", 3],
-//         4: ["Abril", 4],
-//         5: ["Mayo", 5],
-//         6: ["Junio", 6],
-//         7: ["Julio", 7],
-//         8: ["Agosto", 8],
-//         9: ["Septiembre", 9],
-//         10: ["Octubre", 10],
-//         11: ["Noviembre", 11],
-//         12: ["Diciembre", 12],
-//     }
-
-//     for (let  i = 1;  i < 13;  i ++) {
-//         console.log()
-//     //    return ventasMes(meses[i],2019);
-
-//     }
-// console.log(meses[1])
-
-// }
 
 console.log("3.A");
-console.log("Ventas por mes")
 console.log(renderPorMes());
 // Ventas por mes:
 //   Total de enero 2019: 1250
@@ -517,16 +496,19 @@ console.log(renderPorMes());
 // renderPorSucursal() // Muestra una lista del importe total vendido por cada sucursal
 
 function renderPorSucursal() {
+    console.log("Ventas por sucursal")
+    var stringMuyLargo = ""
 
     for (let i = 0; i < local.sucursales.length; i++) {
-        console.log("El local " + local.sucursales[i] + " vendió " + ventasSucursal(local.sucursales[i]));
+        stringMuyLargo = stringMuyLargo + "El local " + local.sucursales[i] + " vendió " + ventasSucursal(local.sucursales[i]) + "\n";
 
     }
+    return stringMuyLargo
 
 }
 
 console.log("3.B")
-console.log("Ventas por sucursal")
+
 console.log(renderPorSucursal());
 // Ventas por sucursal:
 //   Total de Centro: 4195
@@ -540,35 +522,52 @@ console.log(renderPorSucursal());
 
 
 //console.log("Grace vendio: " + ventasVendedora("Grace"));
-//console.log("Ada vendio: " +ventasVendedora("Ada"));
-//console.log("Hedy vendio: " +ventasVendedora("Hedy"));
-//console.log("Sheryl vendio: " +ventasVendedora("Sheryl"));
+//console.log("Ada vendio: " + ventasVendedora("Ada"));
+//console.log("Hedy vendio: " + ventasVendedora("Hedy"));
+//console.log("Sheryl vendio: " + ventasVendedora("Sheryl"));
 
 
 
-// function render() {
-//     var arraysLocos = [];
-//     var mesesNumero = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+function render() {
+    console.log(renderPorMes());
+    console.log(renderPorSucursal());
+    console.log("Producto estrella: " + componenteMasVendido())
 
-//     for (let i = 0; i < mesesNumero.length; i++) {
-//         arraysLocos.push(vendedoraDelMes(mesesNumero[i],2019))
+    var ventasVendedorasGlobal = [];
+
+    for (let i = 0; i < local.vendedoras.length; i++) {
+        vendioVendedora = {
+            nombre: local.vendedoras[i],
+            vendio: 0,
+        }
+
+        vendioVendedora.vendio = vendioVendedora.vendio + ventasVendedora(local.vendedoras[i])
+        ventasVendedorasGlobal.push(vendioVendedora)
+    }
+
+    //console.log(ventasVendedorasGlobal)
+
+    var vendedoraMaxima;
+    var ventaMaxima = 0
+
+    for (let k = 0; k < ventasVendedorasGlobal.length; k++) {
+        //console.log(ventasVendedorasGlobal.length)
+
+        if (ventasVendedorasGlobal[k].vendio > ventaMaxima) {
+            ventaMaxima = ventasVendedorasGlobal[k].vendio;
+            vendedoraMaxima = ventasVendedorasGlobal[k].nombre;
+            return "Vendedora que mas ingresos generó: " + vendedoraMaxima + " y vendio " + ventasVendedorasGlobal[k].vendio
+            
+        }
         
-//     }
+    }
 
-//     console.log(arraysLocos);
+}
 
-// }
+console.log("3.C");
+console.log("Reporte")
 
-
-
-
-
-
-
-
-
-// console.log("3.C");
-// console.log(render());
+console.log(render());
 // Reporte
 // Ventas por mes:
 //   Total de enero 2019: 1250
