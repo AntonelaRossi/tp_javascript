@@ -122,8 +122,6 @@ function vendedoraDelMes(mes, anio) {
 
     }
 
-
-
 }
 console.log("1.C")
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
@@ -550,18 +548,18 @@ function render() {
     var vendedoraMaxima;
     var ventaMaxima = 0
 
-    for (let k = 0; k < ventasVendedorasGlobal.length; k++) {
+    for (var k = 0; k < ventasVendedorasGlobal.length; k++) {
         //console.log(ventasVendedorasGlobal.length)
 
-        if (ventasVendedorasGlobal[k].vendio > ventaMaxima) {
+        if (ventaMaxima < ventasVendedorasGlobal[k].vendio) {
             ventaMaxima = ventasVendedorasGlobal[k].vendio;
             vendedoraMaxima = ventasVendedorasGlobal[k].nombre;
-            return "Vendedora que mas ingresos generó: " + vendedoraMaxima + " y vendio " + ventasVendedorasGlobal[k].vendio
+            
             
         }
         
     }
-
+    return "Vendedora que mas ingresos generó: " + vendedoraMaxima 
 }
 
 console.log("3.C");
