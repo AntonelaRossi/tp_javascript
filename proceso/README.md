@@ -47,17 +47,14 @@ En la condicion del IF van ambas opciones y segun el parametro ingresado, devuel
 Terminado
 
 2F sucursalDelMes(mes, anio)
-Retorna string Sucursal que mas vendio
 Terminado 
 
 3A renderPorMes()
-Hardcodeado
 Terminado
 
 3B renderPorSucursal()
-Hardcodeado
 Terminado
 
 3C render
-Harcodeado
+Terminado
 
