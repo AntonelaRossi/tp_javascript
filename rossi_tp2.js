@@ -1,3 +1,15 @@
+// Rossi, tu trabajo es excelente. 
+// Un solo comentario para ir practicando a futuro, es mejorar los nombres de tus variables
+// (Si bien me gustó mucho leer "stringAmigue")
+// Lo cierto es que buscamos que sean lo mas descriptivos posibles y que los entienda cualquiera que lea nuestro codigo
+// No es algo facil, por eso esta bueno ir armandose la practica desde ahora. 
+
+// Por otro lado, si bien aprecie que hayas comentado todos los console log, en general 
+// para un challenge o para un trabajo, lo ideal es borrarlos cuando ya no nos sean necesarios
+// Ya que interrumpen bastante la lectura de quien esta revisando tu codigo. 
+
+// Mas alla de esas dos observaciones pequeñas, sentite orgullosa que hiciste un gran trabajo. 
+
 var local = { 
     vendedoras: ["Ada", "Grace", "Hedy", "Sheryl"],
 
@@ -43,6 +55,8 @@ function precioMaquina(componentes) {
     return sumaComponente;
 }
 
+// Bien!
+
 var ventaDelDia = ["Monitor GPRS 3000", "Motherboard ASUS 1500", "Monitor ASC 543"];
 console.log("1.A");
 console.log("La suma de los componentes es: " + precioMaquina(ventaDelDia)); // 320 ($200 del monitor + $120 del motherboard) // le agregue otro componente asi que $570
@@ -66,6 +80,20 @@ function cantidadVentasComponente(lasVentas) {
     }
     return sumaVentas.length
 }
+
+// Bien! Una manera alterativa seria con una variable acumuladora
+// Asi:
+
+// function cantidadVentasComponente(componente) {
+//   var total = 0;
+//   for (var i = 0; i < local.ventas.length; i++) {
+//     if (local.ventas[i].componentes.indexOf(componente) >= 0) {
+//       total++;
+//     }
+//   }
+//   return total;
+// }
+
 console.log("1.B")
 console.log("El componente se vendio " + cantidadVentasComponente("Monitor ASC 543") + " veces"); // 2
 
@@ -113,6 +141,29 @@ function vendedoraDelMes(mes, anio) {
         }
     }
 }
+
+// Un solo comentario, y es prestarle atencion a la consigna. El return tenia que ser un numero
+// En este caso no pasa nada, porque no usamos esta funcion en otros casos, 
+// pero quiza en otro momento queramos usar esta funcion para hacer otros calculos, y en ese momento
+// vamos a querer que el retorno sea un numero y solo un numero. 
+// En general los return no son tan descriptivos, (aunque para nosotros sea mas comodo verlos asi)
+// porque van a ser datos que usemos en otras funciones. 
+
+// Una manera alternativa mas breve (aunque mas abstracta) es esta:
+// function vendedoraDelMes(mes, anio) {
+//   var ventasVendedoras = {};
+
+//   for (var i = 0; i < ventas.length; i++) {
+//     if (ventas[i].fecha.getMonth() + 1 === mes && ventas[i].fecha.getFullYear() === anio) {
+//       var vendedora = ventas[i].nombreVendedora;
+//       if (!ventasVendedoras[vendedora]) {
+//         ventasVendedoras[vendedora] = 0;
+//       }
+
+//       ventasVendedoras[vendedora] += precioMaquina( ventas[i].componentes );
+//     }
+//   }
+
 console.log("1.C")
 console.log(vendedoraDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
 
@@ -137,6 +188,9 @@ function ventasMes(mes, anio) {
     }
     return sumaTotal
 }
+
+// excelente 
+
 console.log("1.D")
 console.log("La suma total del mes es " + ventasMes(1, 2019)); // 1250
 
@@ -158,6 +212,9 @@ function ventasVendedora(param) {
     }
     return montoTotal
 }
+
+// excelente 
+
 console.log("1.E")
 console.log("La vendedora elegida vendio " + ventasVendedora("Grace") + " pesos en total"); // 900
 console.log("La vendedora elegida vendio " + ventasVendedora("Ada") + " pesos en total");
@@ -185,6 +242,8 @@ function componenteMasVendido() {
     //console.log(objetoData)
 }
 
+// muy bien!
+
 console.log("1.F")
 console.log("El componente mas vendido es: " + componenteMasVendido()); // Monitor GPRS 3000
 
@@ -201,6 +260,13 @@ function huboVentas(mes, anio) {
         }
     }
 }
+
+// bien! una manera super abreviada seria asi:
+
+// function huboVentas (mes, anio) {
+//   return ventasMes(mes, anio) > 0;
+// }
+
 console.log("1.G")
 console.log("En el mes seleccionado hubo ventas: " + huboVentas(3, 2019)); // false
 
@@ -257,6 +323,7 @@ nuevasVentas(new Date(2019, 1, 14), "Ada", ["Motherboard ASUS 1200", "HDD Toyiva
 
 console.log(local.ventas)
 
+// muy bien, me gusta que lo hayas resuelto con una funcion
 
 //PUNTO DOS D
 
@@ -275,6 +342,8 @@ function ventasSucursal(param) {
     return montoTotal;
 }
 
+// bien
+
 console.log("2.D")
 console.log("La sucursal elegida vendió: " + ventasSucursal("Centro")); // 4195
 
@@ -285,6 +354,7 @@ console.log("2.E")
 console.log("LO UNICO DISTINTO ES LA CONDICION DEL IF: " + "\n" + "if (local.ventas[i].nombreVendedora === param) ---- if (local.ventas[i].sucursal === param)" +  "\n" +
     "Poniendo un Or || en la condicion del if, el resultado solo dependeria de lo que entra por parametro")
 
+// Excelente! 
 
 //PUNTO DOS F
 
@@ -332,6 +402,8 @@ function sucursalDelMes(mes, anio) {
 }
 console.log("2.F")
 console.log(sucursalDelMes(1, 2019)); // "Ada" (vendio por $670, una máquina de $320 y otra de $350)
+
+// excelente. se puede abreviar de la misma manera en que te mostre con vendedoraDelMes
 
 
 ///////////////////////////// PARTE 3 ///////////////////////////////
@@ -414,3 +486,5 @@ console.log("3.C");
 console.log("Reporte")
 
 console.log(render());
+
+// muy bien !
